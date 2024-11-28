@@ -9,6 +9,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-public class MedicinListResponse {
+public class MedicineListResponse {
+
+    private String pharmaceuticalCompany;
+
+    private String medicineName;
+
+    private String image;
+
+    private String message;
 
 }
