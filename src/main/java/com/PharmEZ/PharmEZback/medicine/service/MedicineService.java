@@ -21,4 +21,10 @@ public interface MedicineService {
      */
     List<MedicineListResponse> findByMedicineNameContaining(String medicineName);
 
+    /**
+     * 모든 약을 보여주는 메소드입니다.\
+     *
+     * @author sylee
+     */
+    List<MedicineListResponse> findAllMedicine();
 }

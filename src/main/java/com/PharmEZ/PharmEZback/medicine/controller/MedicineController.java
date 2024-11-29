@@ -32,7 +32,7 @@ public class MedicineController {
                     .headers(headers)
                     .body(response);
         }
-        catch (MedicineNotFoundException e) {
+        catch (MedicineNotFoundException ex) {
 //            String result = "Status : " + ResponseEntity.status(404) +"/nid :" +id;
             MedicineInfoResponse errorResponse = MedicineInfoResponse.builder()
                     .message("id: " + id)
@@ -40,9 +40,9 @@ public class MedicineController {
             return ResponseEntity.status(404)
                     .body(errorResponse);
         }
-        catch (Exception e) {
+        catch (Exception ex) {
             MedicineInfoResponse errorResponse = MedicineInfoResponse.builder()
-                    .message("error: " + e.getMessage())
+                    .message("error: " + ex.getMessage())
                     .build();
             return ResponseEntity.status(500)
                     .body(errorResponse);
@@ -61,16 +61,42 @@ public class MedicineController {
                     .headers(headers)
                     .body(response);
         }
-        catch (MedicineNotFoundException e) {
+        catch (MedicineNotFoundException ex) {
             MedicineListResponse errorResponse = MedicineListResponse.builder()
                     .message("name" + medicineName)
                     .build();
             return ResponseEntity.status(404)
                     .body(Collections.singletonList(errorResponse));
         }
-        catch (Exception e) {
+        catch (Exception ex) {
             MedicineListResponse errorResponse = MedicineListResponse.builder()
-                    .message("error: " + e.getMessage())
+                    .message("error: " + ex.getMessage())
+                    .build();
+            return ResponseEntity.status(500)
+                    .body(Collections.singletonList(errorResponse));
+        }
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<MedicineListResponse>> getAllMedicines() {
+        try{
+            HttpHeaders headers = new HttpHeaders();
+            headers.add("Content-Type", "application/json;charset=UTF-8");
+            List<MedicineListResponse> response = medicineService.findAllMedicine();
+            return ResponseEntity.status(200)
+                    .headers(headers)
+                    .body(response);
+        }
+        catch(MedicineNotFoundException ex) {
+            MedicineListResponse errorResponse = MedicineListResponse.builder()
+                    .message("Any Data not exists for your program.")
+                    .build();
+            return ResponseEntity.status(404)
+                    .body(Collections.singletonList(errorResponse));
+        }
+        catch (Exception ex) {
+            MedicineListResponse errorResponse = MedicineListResponse.builder()
+                    .message("error: " + ex.getMessage())
                     .build();
             return ResponseEntity.status(500)
                     .body(Collections.singletonList(errorResponse));
