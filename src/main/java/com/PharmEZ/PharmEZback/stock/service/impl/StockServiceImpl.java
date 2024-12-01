@@ -1,6 +1,13 @@
 package com.PharmEZ.PharmEZback.stock.service.impl;
 
+
+import com.PharmEZ.PharmEZback.medicine.entity.Medicine;
+import com.PharmEZ.PharmEZback.medicine.repository.MedicineRepository;
+import com.PharmEZ.PharmEZback.pharmacy.entity.Pharmacy;
+import com.PharmEZ.PharmEZback.pharmacy.repository.PharmacyRepository;
+import com.PharmEZ.PharmEZback.stock.dto.request.StockInfoRequest;
 import com.PharmEZ.PharmEZback.stock.dto.response.MedicineInfoInStockResponse;
+import com.PharmEZ.PharmEZback.stock.entity.Stock;
 import com.PharmEZ.PharmEZback.stock.repository.StockRepository;
 import com.PharmEZ.PharmEZback.stock.service.StockService;
 import java.util.List;
@@ -13,14 +20,15 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 @RequiredArgsConstructor
 public class StockServiceImpl implements StockService {
-    final StockRepository stockRepository;
+    private final StockRepository stockRepository;
+    private final PharmacyRepository pharmacyRepository;
+    private final MedicineRepository medicineRepository;
 
     /**
      * findMedicineOnPharmacyByStock
      *
      * @param pharmacyId
      * @param pageable
-     *
      * @return List<MedicineInfoInStockResponse>
      *
      * @author sylee
@@ -28,5 +36,26 @@ public class StockServiceImpl implements StockService {
     @Override
     public List<MedicineInfoInStockResponse> findMedicineOnPharmacyByStock(Long pharmacyId, Pageable pageable) {
         return stockRepository.findMedicineOnPharmacyByStock(pharmacyId, pageable);
+    }
+
+    /**
+     * saveStockByPharmacy
+     *
+     * @param stockInfoRequest
+     * @return String
+     *
+     * @author sylee
+     */
+    @Override
+    public String saveStockByPharmacy(StockInfoRequest stockInfoRequest) {
+        Pharmacy pharmacy = pharmacyRepository.findById(stockInfoRequest.getPharmacyId()).get();
+        Medicine medicine= medicineRepository.findById(stockInfoRequest.getMedicineId()).get();
+        Stock stock = Stock.builder()
+                .pharmacy(pharmacy)
+                .medicine(medicine)
+                .isOutOfStock(stockInfoRequest.getIsOutOfStock())
+                .build();
+        stockRepository.saveAndFlush(stock);
+        return "success";
     }
 }
