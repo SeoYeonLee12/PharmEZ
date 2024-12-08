@@ -2,6 +2,7 @@ package com.PharmEZ.PharmEZback.stock.repository.impl;
 
 import com.PharmEZ.PharmEZback.medicine.entity.QMedicine;
 import com.PharmEZ.PharmEZback.pharmacy.entity.QPharmacy;
+import com.PharmEZ.PharmEZback.stock.dto.request.StockUpdateInfo;
 import com.PharmEZ.PharmEZback.stock.dto.response.MedicineInfoInStockResponse;
 import com.PharmEZ.PharmEZback.stock.entity.QStock;
 import com.PharmEZ.PharmEZback.stock.entity.Stock;
@@ -42,5 +43,24 @@ public class StockRepositoryImpl extends QuerydslRepositorySupport implements St
                 .fetch();
 
         return result;
+    }
+
+    /**
+     * 품절되었을 경우 제고 상태를 업데이트하는 메소드입니다.
+     *
+     * @param stockUpdateInfo
+     * @return String
+     *
+     * @author sylee
+     */
+    @Override
+    public String updatedStockStatus(StockUpdateInfo stockUpdateInfo) {
+        QStock stock = QStock.stock;
+
+        update(stock)
+                .set(stock.isOutOfStock, stockUpdateInfo.getIsOutOfStock())
+                .where(stock.id.eq(stockUpdateInfo.getStockId()))
+                .execute();
+        return "Successfully updated stock";
     }
 }

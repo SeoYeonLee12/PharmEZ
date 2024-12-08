@@ -6,6 +6,7 @@ import com.PharmEZ.PharmEZback.medicine.repository.MedicineRepository;
 import com.PharmEZ.PharmEZback.pharmacy.entity.Pharmacy;
 import com.PharmEZ.PharmEZback.pharmacy.repository.PharmacyRepository;
 import com.PharmEZ.PharmEZback.stock.dto.request.StockInfoRequest;
+import com.PharmEZ.PharmEZback.stock.dto.request.StockUpdateInfo;
 import com.PharmEZ.PharmEZback.stock.dto.response.MedicineInfoInStockResponse;
 import com.PharmEZ.PharmEZback.stock.entity.Stock;
 import com.PharmEZ.PharmEZback.stock.repository.StockRepository;
@@ -57,5 +58,20 @@ public class StockServiceImpl implements StockService {
                 .build();
         stockRepository.saveAndFlush(stock);
         return "success";
+    }
+
+    /**
+     * updatedStockByPharmacy
+     *
+     * @param stockUpdateInfo
+     * @return
+     * @author sylee
+     *
+     * 보통 상태를 바꾸려면.. 재고가 있는 거에서 없는 거로 바뀌는 거 밖에는 없다.. 그러면 약사가 자신의 어플에서 재고 없음으로 바꾸는 것을 전달했을 때..!!
+     */
+    @Override
+    public String updatedStockStatus(StockUpdateInfo stockUpdateInfo) {
+        stockRepository.updatedStockStatus(stockUpdateInfo);
+        return "updated success";
     }
 }

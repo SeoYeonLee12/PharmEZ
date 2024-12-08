@@ -1,6 +1,7 @@
 package com.PharmEZ.PharmEZback.stock.service;
 
 import com.PharmEZ.PharmEZback.stock.dto.request.StockInfoRequest;
+import com.PharmEZ.PharmEZback.stock.dto.request.StockUpdateInfo;
 import com.PharmEZ.PharmEZback.stock.dto.response.MedicineInfoInStockResponse;
 import java.util.List;
 import org.springframework.data.domain.Pageable;
@@ -27,4 +28,14 @@ public interface StockService {
      * @author sylee
      */
     String saveStockByPharmacy(StockInfoRequest stockInfoRequest);
+
+    /**
+     * updatedStockByPharmacy
+     *
+     * @param stockUpdateInfo
+     * @return
+     *
+     * @author sylee
+     */
+    String updatedStockStatus(StockUpdateInfo stockUpdateInfo);
 }

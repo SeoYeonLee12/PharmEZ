@@ -1,14 +1,16 @@
 package com.PharmEZ.PharmEZback.stock.controller;
 
-import static com.PharmEZ.PharmEZback.pharmacy.entity.QPharmacy.pharmacy;
 import static com.PharmEZ.PharmEZback.stock.utility.StockMapper.toListMedicineInfoInStockResponse;
 
 import com.PharmEZ.PharmEZback.medicine.exception.MedicineNotFoundException;
 import com.PharmEZ.PharmEZback.stock.dto.request.StockInfoRequest;
+import com.PharmEZ.PharmEZback.stock.dto.request.StockUpdateInfo;
 import com.PharmEZ.PharmEZback.stock.dto.response.MedicineInfoInStockResponse;
+import com.PharmEZ.PharmEZback.stock.exception.StockNotFoundExeption;
 import com.PharmEZ.PharmEZback.stock.service.StockService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -16,12 +18,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/stocks")
@@ -80,6 +83,30 @@ public class StockController {
             return ResponseEntity.status(501)
                     .body("\'status\' : \'"+ex.getMessage()+"\'");
         }
+    }
+
+    @PutMapping("/{stockId}")
+    public ResponseEntity<String> updatedStockStatus(@PathVariable Long stockId, @RequestBody StockUpdateInfo stockUpdateInfo){
+        try{
+            log.info(stockUpdateInfo.getIsOutOfStock().toString());
+            HttpHeaders headers = new HttpHeaders();
+            headers.add("Content-Type", "application/json;charset=UTF-8");
+            stockService.updatedStockStatus(stockUpdateInfo);
+
+            return ResponseEntity.status(200)
+                    .headers(headers)
+                    .body("\'status\' : \'updated\'");
+
+        }
+        catch(StockNotFoundExeption ex){
+            return ResponseEntity.status(404)
+                    .body("\'status\' : \'Stock not found\'");
+        }
+        catch(Exception ex){
+            return ResponseEntity.status(500)
+                    .body("\'status\' : \'"+ex.getMessage()+"\'");
+        }
+
     }
 
 }

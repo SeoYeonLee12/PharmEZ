@@ -1,5 +1,6 @@
 package com.PharmEZ.PharmEZback.stock.repository;
 
+import com.PharmEZ.PharmEZback.stock.dto.request.StockUpdateInfo;
 import com.PharmEZ.PharmEZback.stock.dto.response.MedicineInfoInStockResponse;
 import java.util.List;
 import org.springframework.data.domain.Pageable;
@@ -17,4 +18,14 @@ public interface StockRepositoryCustom {
      * @author sylee
      */
     List<MedicineInfoInStockResponse> findMedicineOnPharmacyByStock(Long pharmacyId, Pageable pageable);
+
+    /**
+     * 품절되었을 경우 제고 상태를 업데이트하는 메소드입니다.
+     *
+     * @param stockUpdateInfo
+     * @return String
+     *
+     * @author sylee
+     */
+    String updatedStockStatus(StockUpdateInfo stockUpdateInfo);
 }
