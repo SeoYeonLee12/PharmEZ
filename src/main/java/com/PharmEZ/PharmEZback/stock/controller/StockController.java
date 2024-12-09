@@ -1,11 +1,15 @@
 package com.PharmEZ.PharmEZback.stock.controller;
 
 import static com.PharmEZ.PharmEZback.stock.utility.StockMapper.toListMedicineInfoInStockResponse;
+import static com.PharmEZ.PharmEZback.stock.utility.StockMapper.toListPharmacyInfoResponse;
 
 import com.PharmEZ.PharmEZback.medicine.exception.MedicineNotFoundException;
+import com.PharmEZ.PharmEZback.stock.dto.request.PharmacySearchRequest;
 import com.PharmEZ.PharmEZback.stock.dto.request.StockInfoRequest;
 import com.PharmEZ.PharmEZback.stock.dto.request.StockUpdateInfo;
 import com.PharmEZ.PharmEZback.stock.dto.response.MedicineInfoInStockResponse;
+import com.PharmEZ.PharmEZback.stock.dto.response.PharmacyInfoResponse;
+import com.PharmEZ.PharmEZback.stock.exception.PossessedPharmacyNotFoundException;
 import com.PharmEZ.PharmEZback.stock.exception.StockNotFoundExeption;
 import com.PharmEZ.PharmEZback.stock.service.StockService;
 import java.util.List;
@@ -24,6 +28,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * StockController
+ *
+ * @author sylee
+ */
 @Slf4j
 @RestController
 @RequiredArgsConstructor
@@ -80,7 +89,7 @@ public class StockController {
         }
         catch(Exception ex){
             ex.printStackTrace();
-            return ResponseEntity.status(501)
+            return ResponseEntity.status(500)
                     .body("\'status\' : \'"+ex.getMessage()+"\'");
         }
     }
@@ -109,4 +118,37 @@ public class StockController {
 
     }
 
+    @GetMapping("/search/{medicineName}")
+    public ResponseEntity<List<PharmacyInfoResponse>> findMedicineByLocationBasedPharmacy(@PathVariable String medicineName, @RequestParam Double latitude, @RequestParam Double longitude, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
+        try {
+            HttpHeaders headers = new HttpHeaders();
+            headers.add("Content-Type", "application/json;charset=UTF-8");
+            Pageable pageable = PageRequest.of(page, size);
+            PharmacySearchRequest request = PharmacySearchRequest.builder()
+                    .medicineName(medicineName)
+                    .latitude(latitude)
+                    .longitude(longitude)
+                    .build();
+            List<PharmacyInfoResponse> response = stockService.findMedicineByLocationBasedPharmacy(request, pageable);
+            return ResponseEntity.status(200)
+                    .headers(headers)
+                    .body(response);
+        } catch (PossessedPharmacyNotFoundException ex) {
+            List<PharmacyInfoResponse> errorResponse =
+                    toListPharmacyInfoResponse(PharmacyInfoResponse.builder()
+                            .message("Not exist Pharmacy" + ex)
+                            .build());
+            return ResponseEntity.status(404)
+                    .body(errorResponse);
+        } catch (Exception ex) {
+            List<PharmacyInfoResponse> errorResponse =
+                    toListPharmacyInfoResponse(PharmacyInfoResponse.builder()
+                            .message("error: " + ex.getMessage())
+                            .build());
+            return ResponseEntity.status(500)
+                    .body(errorResponse);
+
+
+        }
+    }
 }
