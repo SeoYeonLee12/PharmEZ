@@ -35,7 +35,7 @@ public interface StockService {
      * updatedStockByPharmacy
      *
      * @param stockUpdateInfo
-     * @return
+     * @return updatedStockStatus
      *
      * @author sylee
      */

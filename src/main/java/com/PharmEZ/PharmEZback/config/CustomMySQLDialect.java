@@ -12,5 +12,9 @@ public class CustomMySQLDialect extends MySQLDialect {
         // ST_Distance_Sphere 함수
         registerFunction("ST_Distance_Sphere", new StandardSQLFunction("ST_Distance_Sphere", StandardBasicTypes.DOUBLE));
         registerFunction("POINT", new StandardSQLFunction("POINT", StandardBasicTypes.STRING));
+        // now
+        registerFunction("NOW", new StandardSQLFunction("NOW", StandardBasicTypes.STRING));
+        registerFunction("DAYOFWEEK", new StandardSQLFunction("DAYOFWEEK", StandardBasicTypes.INTEGER));
     }
+
 }

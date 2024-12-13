@@ -51,7 +51,7 @@ public class StockRepositoryImpl extends QuerydslRepositorySupport implements St
     }
 
     /**
-     * 품절되었을 경우 제고 상태를 업데이트하는 메소드입니다.
+     * 품절되었을 경우 재고 상태를 업데이트하는 메소드입니다.
      *
      * @param stockUpdateInfo
      * @return String
