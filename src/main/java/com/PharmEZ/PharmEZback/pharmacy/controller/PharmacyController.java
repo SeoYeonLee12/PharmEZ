@@ -6,6 +6,7 @@ import static com.PharmEZ.PharmEZback.pharmacy.utility.PharmacyMapper.toListPhar
 import static com.PharmEZ.PharmEZback.pharmacy.utility.PharmacyMapper.toListPharmacySearchResultResponse;
 
 import com.PharmEZ.PharmEZback.pharmacy.dto.request.MyLocationRequest;
+import com.PharmEZ.PharmEZback.pharmacy.dto.request.PharmacySearchByIdRequest;
 import com.PharmEZ.PharmEZback.pharmacy.dto.request.PharmacySearchByNameRequest;
 import com.PharmEZ.PharmEZback.pharmacy.dto.response.PharmacyListInfoResponse;
 import com.PharmEZ.PharmEZback.pharmacy.dto.response.PharmacyLocationListResponse;
@@ -120,6 +121,36 @@ public class PharmacyController {
             return ResponseEntity.status(500)
                     .body(errorResponse);
         }
+    }
 
+    @GetMapping("/id")
+    public ResponseEntity<PharmacySearchResultResponse> findPharmacyByPharmacyName(@ModelAttribute
+                                                                                         PharmacySearchByIdRequest pharmacySearchByIdRequest){
+
+        try{
+            HttpHeaders headers = new HttpHeaders();
+            headers.add("Content-Type", "application/json;charset=UTF-8");
+
+            PharmacySearchResultResponse resultResponse= pharmacyService.findPharmacyByPharmacyId(pharmacySearchByIdRequest);
+            return ResponseEntity.status(200)
+                    .headers(headers)
+                    .body(resultResponse);
+        }
+        catch (PharmacyNotFoundException ex){
+            PharmacySearchResultResponse errorResponse = PharmacySearchResultResponse.builder()
+                    .message("medicineId"+pharmacySearchByIdRequest.getId())
+                    .build();
+
+            return ResponseEntity.status(404)
+                    .body(errorResponse);
+        }
+        catch (Exception ex){
+            PharmacySearchResultResponse errorResponse = PharmacySearchResultResponse.builder()
+                    .message("error: "+ex.getMessage())
+                    .build();
+
+            return ResponseEntity.status(500)
+                    .body(errorResponse);
+        }
     }
 }

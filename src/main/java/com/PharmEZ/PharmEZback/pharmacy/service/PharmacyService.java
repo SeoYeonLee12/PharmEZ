@@ -2,6 +2,7 @@ package com.PharmEZ.PharmEZback.pharmacy.service;
 
 
 import com.PharmEZ.PharmEZback.pharmacy.dto.request.MyLocationRequest;
+import com.PharmEZ.PharmEZback.pharmacy.dto.request.PharmacySearchByIdRequest;
 import com.PharmEZ.PharmEZback.pharmacy.dto.request.PharmacySearchByNameRequest;
 import com.PharmEZ.PharmEZback.pharmacy.dto.response.PharmacyListInfoResponse;
 import com.PharmEZ.PharmEZback.pharmacy.dto.response.PharmacyLocationListResponse;
@@ -25,4 +26,6 @@ public interface PharmacyService {
     List<PharmacyLocationListResponse> findPharmacyByLocationForMap(MyLocationRequest myLocationRequest);
 
     List<PharmacySearchResultResponse> findPharmacyByPharmacyName(PharmacySearchByNameRequest pharmacySearchByNameRequest, Pageable pageable);
+
+    PharmacySearchResultResponse findPharmacyByPharmacyId(PharmacySearchByIdRequest pharmacySearchByIdRequest);
 }

@@ -4,6 +4,7 @@ package com.PharmEZ.PharmEZback.pharmacy.repository.impl;
 import static com.PharmEZ.PharmEZback.pharmacy.entity.QPharmacy.pharmacy;
 
 import com.PharmEZ.PharmEZback.pharmacy.dto.request.MyLocationRequest;
+import com.PharmEZ.PharmEZback.pharmacy.dto.request.PharmacySearchByIdRequest;
 import com.PharmEZ.PharmEZback.pharmacy.dto.request.PharmacySearchByNameRequest;
 import com.PharmEZ.PharmEZback.pharmacy.dto.response.PharmacyListInfoResponse;
 import com.PharmEZ.PharmEZback.pharmacy.dto.response.PharmacyLocationListResponse;
@@ -148,6 +149,24 @@ public class PharmacyRepositoryImpl extends QuerydslRepositorySupport implements
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .fetch();
+    }
+
+    @Override
+    public PharmacySearchResultResponse findPharmacyByPharmacyId(PharmacySearchByIdRequest pharmacySearchByIdRequest) {
+        QPharmacy pharmacy = QPharmacy.pharmacy;
+
+        return from(pharmacy)
+                .where(pharmacy.id.eq(pharmacySearchByIdRequest.getId()))
+                .select(Projections.constructor(PharmacySearchResultResponse.class,
+                        pharmacy.id,
+                        pharmacy.name,
+                        pharmacy.latitude,
+                        pharmacy.longitude,
+                        getDistance(pharmacySearchByIdRequest.getLatitude(), pharmacySearchByIdRequest.getLongitude()),
+                        isOpen(startTime(), closeTime()),
+                        closeTime()
+                        ))
+                .fetchOne();
     }
 
     /**

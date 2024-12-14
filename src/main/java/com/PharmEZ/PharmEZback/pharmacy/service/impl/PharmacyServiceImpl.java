@@ -1,6 +1,7 @@
 package com.PharmEZ.PharmEZback.pharmacy.service.impl;
 
 import com.PharmEZ.PharmEZback.pharmacy.dto.request.MyLocationRequest;
+import com.PharmEZ.PharmEZback.pharmacy.dto.request.PharmacySearchByIdRequest;
 import com.PharmEZ.PharmEZback.pharmacy.dto.request.PharmacySearchByNameRequest;
 import com.PharmEZ.PharmEZback.pharmacy.dto.response.PharmacyListInfoResponse;
 import com.PharmEZ.PharmEZback.pharmacy.dto.response.PharmacyLocationListResponse;
@@ -49,5 +50,10 @@ public class PharmacyServiceImpl implements PharmacyService {
     public List<PharmacySearchResultResponse> findPharmacyByPharmacyName(
             PharmacySearchByNameRequest pharmacySearchByNameRequest, Pageable pageable) {
         return pharmacyRepository.findPharmacyByPharmacyName(pharmacySearchByNameRequest, pageable);
+    }
+
+    @Override
+    public PharmacySearchResultResponse findPharmacyByPharmacyId(PharmacySearchByIdRequest pharmacySearchByIdRequest) {
+        return pharmacyRepository.findPharmacyByPharmacyId(pharmacySearchByIdRequest);
     }
 }
