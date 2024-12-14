@@ -119,7 +119,7 @@ public class StockController {
     }
 
     @GetMapping("/search/{medicineName}")
-    public ResponseEntity<List<PharmacyInfoResponse>> findMedicineByLocationBasedPharmacy(@PathVariable String medicineName, @RequestParam Double latitude, @RequestParam Double longitude, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
+    public ResponseEntity<List<PharmacyInfoResponse>> findMedicineByLocationBasedPharmacy(@PathVariable String medicineName, @RequestParam(required = false) Double latitude, @RequestParam(required = false) Double longitude, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
         try {
             HttpHeaders headers = new HttpHeaders();
             headers.add("Content-Type", "application/json;charset=UTF-8");
