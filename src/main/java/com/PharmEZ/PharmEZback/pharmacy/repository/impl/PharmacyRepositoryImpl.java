@@ -32,9 +32,9 @@ public class PharmacyRepositoryImpl extends QuerydslRepositorySupport implements
                 pharmacy.longitude, pharmacy.latitude,
                 myLocationRequest.getLongitude(), myLocationRequest.getLatitude());
 
-        StringExpression currentTime = Expressions.stringTemplate("NOW()");
+        StringExpression currentTime = Expressions.stringTemplate("DATE_FORMAT(NOW(), '%H:%i')");
 
-        NumberExpression<Integer> dayOfWeek = Expressions.numberTemplate(Integer.class, "DAYOFWEEK({0})", currentTime);
+        NumberExpression<Integer> dayOfWeek = Expressions.numberTemplate(Integer.class,  "DAYOFWEEK(NOW())");
 
         StringExpression startTime = new CaseBuilder()
                 .when(dayOfWeek.eq(1)).then(pharmacy.sunStart)
@@ -66,7 +66,7 @@ public class PharmacyRepositoryImpl extends QuerydslRepositorySupport implements
                 .when(dayOfWeek.eq(7)).then("토")
                 .otherwise("");
 
-        log.debug(startTime+"\n요일"+dayOfWeek+"\n현재시각 "+currentTime+" "+closeTime);
+
 
         return from(pharmacy)
                 .where(distance.loe(5000.0))
