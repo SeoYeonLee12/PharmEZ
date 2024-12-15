@@ -11,6 +11,8 @@ import lombok.NoArgsConstructor;
 @Getter
 public class MedicineListResponse {
 
+    private Long id;
+
     private String pharmaceuticalCompany;
 
     private String medicineName;
@@ -19,4 +21,11 @@ public class MedicineListResponse {
 
     private String message;
 
+    public MedicineListResponse(Long id, String pharmaceuticalCompany, String medicineName, String image) {
+        this.id = id;
+        this.pharmaceuticalCompany = pharmaceuticalCompany;
+        this.medicineName = medicineName;
+        this.image = image;
+        this.message=null;
+    }
 }
