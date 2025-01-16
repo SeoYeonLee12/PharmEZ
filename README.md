@@ -6,7 +6,7 @@
 | 이서연 |  
 |-------------|  
 | ![image](https://github.com/user-attachments/assets/12c5e14a-0910-4e52-8b6a-f6147395b9e3) |  
-| @LeeSeoYeon |  
+| @SeoYeonLee12 |  
 
 </div>
 
