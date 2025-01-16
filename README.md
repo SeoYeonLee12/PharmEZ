@@ -3,10 +3,10 @@
 # 👩‍💻 Member
 <div style="width: 50%; font-size: 14px;">
   
-| 이서연 |  
+| [이서연](https://github.com/SeoYeonLee12) |  
 |-------------|  
-| ![image](https://github.com/user-attachments/assets/12c5e14a-0910-4e52-8b6a-f6147395b9e3) |  
-| @SeoYeonLee12 |  
+| |<img src="![image](https://github.com/user-attachments/assets/7408c8cc-e81a-416f-a6f0-67a9e0510123)" width = 80>| |  
+ 
 
 </div>
 
