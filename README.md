@@ -5,7 +5,7 @@
   
 | [이서연](https://github.com/SeoYeonLee12) |  
 |-------------|  
-| |<img src="![image](https://github.com/user-attachments/assets/7408c8cc-e81a-416f-a6f0-67a9e0510123)" width = 80>| |  
+| |<img src="https://avatars.githubusercontent.com/u/134525851?v=4" width = 80>| |  
  
 
 </div>
