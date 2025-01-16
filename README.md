@@ -1,14 +1,11 @@
 # Server
 
 # 👩‍💻 Member
-<div style="width: 50%; font-size: 14px;">
-  
 | [이서연](https://github.com/SeoYeonLee12) |  
 |-------------|  
 | |<img src="https://avatars.githubusercontent.com/u/134525851?v=4" width = 80>| |  
  
 
-</div>
 
 
 # 🛠️ 개발환경
@@ -22,7 +19,17 @@
 | Spring Version         | 2.7.18         |
 
 
+
+
 # 🏛️ System Architecture
 ![image](https://github.com/user-attachments/assets/8c6758bb-db26-4031-9b48-d37eefeb494d)
 ![image](https://github.com/user-attachments/assets/ac51a897-112d-41e1-8fe3-c59f241220da)
+
+
+
+
+# ☁️ ERD Diagram
+![PharmEZ_ERD.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/ddd33409-05d8-4a3d-a131-60bae92e8e56/d0d44747-2baf-4f70-8dd2-f94057f870b6/PharmEZ_ERD.png)
+
+
 
