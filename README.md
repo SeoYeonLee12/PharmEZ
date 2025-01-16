@@ -31,6 +31,8 @@
 <br>
 
 # 💻 Technology
+### Language - ![image](https://camo.githubusercontent.com/0bab53d622fb76c812b78d69a4a3fb5fd67f80923601b8f609790cd7fd3bbc33/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4a61766125323031312d4544384230303f7374796c653d666f722d7468652d6261646765266c6f676f3d6f70656e6a646b266c6f676f436f6c6f723d7768697465)
 ### Framework - ![image](https://camo.githubusercontent.com/0eca6769e181842d27850c17afc037ecf3f09ba26a1b508c6854d0cce31694cb/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f537072696e672d3644423333463f7374796c653d666f722d7468652d6261646765266c6f676f3d737072696e67266c6f676f436f6c6f723d7768697465)
-### Database - ![image](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=MySQL&logoColor=white)
+### Database - ![image](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=MySQL&logoColor=white)
+### 
 
