@@ -22,4 +22,7 @@
 | Spring Version         | 2.7.18         |
 
 
-# System Architecture
+# 🏛️ System Architecture
+![image](https://github.com/user-attachments/assets/8c6758bb-db26-4031-9b48-d37eefeb494d)
+![image](https://github.com/user-attachments/assets/ac51a897-112d-41e1-8fe3-c59f241220da)
+
